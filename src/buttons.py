@@ -1,24 +1,41 @@
-import RPi.GPIO as GPIO
+import keyboard
 import time
 
-# Button pin layout
-BUTTONS = {
-    "select": 5,
-    "next": 6,
-    "prev": 13,
-    "reset": 19
+# Simulate pin states: 1 = HIGH (not pressed), 0 = LOW (pressed)
+pin_states = {}
+
+# GPIO constants
+BOARD = "BOARD"
+BCM = "BCM"
+IN = "IN"
+OUT = "OUT"
+PUD_UP = "PUD_UP"
+LOW = 0
+HIGH = 1
+
+# Map pins to keys
+pin_keys = {
+    5: 'w',   # select
+    6: 'x',   # next
+    13: 's',  # prev
+    19: 'r'   # reset
 }
 
-def setup_buttons():
-    GPIO.setmode(GPIO.BCM)
-    
-    for pin in BUTTONS.values():
-        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+def setmode(mode):
+    print(f"[MOCK GPIO] Set mode: {mode}")
 
-def get_pressed_button():
-    """Check which button is pressed"""
-    for name, pin in BUTTONS.items():
-        if GPIO.input(pin) == GPIO.LOW:
-            time.sleep(0.2)
-            return name
-    return None
+def setup(pin, mode, pull_up_down=None):
+    pin_states[pin] = HIGH  # pull-up: default state is HIGH
+    print(f"[MOCK GPIO] Setup pin {pin} as {mode}, pull_up_down={pull_up_down}")
+
+def input(pin):
+    key = pin_keys.get(pin)
+    if key and keyboard.is_pressed(key):
+        pin_states[pin] = LOW
+    else:
+        pin_states[pin] = HIGH
+    return pin_states[pin]
+
+def cleanup():
+    print("[MOCK GPIO] Cleanup called")
+    pin_states.clear()

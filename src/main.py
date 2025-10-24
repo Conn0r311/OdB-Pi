@@ -1,8 +1,12 @@
 from display import init_display, draw_main_screen
 from obd_reader import connect_obd, get_dtc_codes, clear_codes 
-from buttons import setup_buttons, get_pressed_button 
+from buttons_1 import setup_buttons, get_pressed_button 
 from splash import show_splash
 from config import *
+try:
+    import obd  # real OBD library (on Raspberry Pi)
+except (ImportError, RuntimeError):
+    import fake_obd as obd  # use the fake module on PC
 import pygame
 import time 
 
