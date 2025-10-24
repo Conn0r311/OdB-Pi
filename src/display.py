@@ -8,6 +8,7 @@ def init_display():
     pygame.display.set_caption("OdB Pi Scanner")
     font = pygame.font.SysFont(FONT_NAME, 22)
     return screen, font
+
 def draw_main_screen(screen, font, dtcs, status_text):
     screen.fill(BLACK)
     title = font.render("OdB Pi Scanner", True, WHITE)

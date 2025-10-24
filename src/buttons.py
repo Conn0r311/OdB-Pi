@@ -11,6 +11,7 @@ BUTTONS = {
 
 def setup_buttons():
     GPIO.setmode(GPIO.BCM)
+    
     for pin in BUTTONS.values():
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
