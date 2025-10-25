@@ -1,7 +1,7 @@
 from display import init_display, draw_main_screen
 from obd_reader import connect_obd, get_dtc_codes, clear_codes 
 from buttons_1 import setup_buttons, get_pressed_button 
-from splash import show_splash
+#from splash import show_splash
 from config import *
 try:
     import obd  # real OBD library (on Raspberry Pi)
@@ -13,7 +13,7 @@ import time
 
 def main():
     screen, font = init_display()
-    show_splash(screen, font)
+    #show_splash(screen, font)
     setup_buttons()
 
     connection = connect_obd()
