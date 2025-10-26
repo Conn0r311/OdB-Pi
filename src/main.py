@@ -1,6 +1,6 @@
 from display import init_display, draw_main_screen
 from obd_reader import connect_obd, get_dtc_codes, clear_codes 
-from buttons_1 import setup_buttons, get_pressed_button 
+from buttons import setup_buttons, get_pressed_button 
 #from splash import show_splash
 from config import *
 try:
